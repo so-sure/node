@@ -1,0 +1,7 @@
+const database = 'local';
+const collection = 'PHONE';
+
+// Select the database to use.
+use(database);
+
+db.collection.findOne({ '_id': 1});
