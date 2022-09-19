@@ -105,3 +105,6 @@ dist
 
 # Vagrant
 .vagrant
+
+# Build output
+build/
