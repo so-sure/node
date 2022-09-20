@@ -2,6 +2,10 @@ import http from 'http';
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import routes from './routes/PhoneRoutes';
+import { populateDb } from './db/conn';
+
+/** Set up starting state for DB */
+populateDb();  // todo - move this to external script
 
 const router: Express = express();
 

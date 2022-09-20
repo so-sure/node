@@ -4,5 +4,7 @@ const router = express.Router();
 
 router.get('/phones', controller.getPhones);
 router.get('/phones/:id', controller.getPhone);
+router.delete('/phones/:id', controller.deletePhone);
+router.put('/phones/:id', controller.updatePhone);
 
 export = router;
