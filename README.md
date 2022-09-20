@@ -37,3 +37,54 @@ Mysql:
 user: root
 pwd:  root
 ```
+
+# Taylor Petrillo Case Study
+After SSHing into vagrant, use the following:
+```
+cd /vagrant
+npm ci
+npm run build
+cd /build
+node server.js
+```
+
+The server should still be accessible from localhost:1337
+The available endpoints are as follows:
+
+```
+GET /phones
+```
+Returns all phones, or error message if none found
+
+```
+GET /phones/:id
+```
+Returns a phone with the given id, or error message if not found
+
+```
+DELETE /phones/:id
+```
+Deletes a phone with the given id
+Returns a success message, or error message if not found/operation fails
+
+```
+PUT /phones/:id
+```
+Updates a phone with the given id
+Returns a success message
+or error message if the request is invalid/phone is not found/operation fails
+
+Request is a JSON object matching the interface found in `/src/types/phone.ts`
+
+Example:
+```
+{
+    "model": "iPhone 11",
+    "excess": 123
+}
+```
+
+Validation matches the interface, for example a model of `iPhone 12` would fail validation.
+
+## Known Issues
+Validation for `monthlyPremium` fails unexpectedly for numbers ending in 00 `(ie. 2.00)`
