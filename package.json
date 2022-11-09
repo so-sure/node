@@ -1,6 +1,16 @@
 {
   "dependencies": {
+    "chai": "^4.3.7",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "joi": "^17.7.0",
+    "mysql2": "^2.3.3",
+    "uuid": "^9.0.0"
+  },
+  "scripts": {
+    "test": "mocha tests/**/* --exit"
+  },
+  "devDependencies": {
+    "mocha": "^10.1.0"
   }
 }
