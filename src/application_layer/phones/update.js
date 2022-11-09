@@ -1,18 +1,18 @@
 const joi = require('joi');
 
-const dataAccessLayer = require('../../../src/data_access_layer/phones')
+const dataAccessLayer = require('../../../src/data_access_layer/phones');
 
 const PATH_SCHEMA = joi.object().keys({
   'phoneId': joi.string().required(),
 }).required();
 
 const REQUEST_SCHEMA = joi.object().keys({
-    'make': joi.string().required(),
-    'model': joi.string().required(),
-    'storage': joi.number().required(),
-    'monthly_premium': joi.number().precision(2).required(),
-    'excess': joi.number().required(),
-})
+  'make':            joi.string().required(),
+  'model':           joi.string().required(),
+  'storage':         joi.number().required(),
+  'monthly_premium': joi.number().precision(2).required(),
+  'excess':          joi.number().required(),
+});
 
 function parseInputParameters(request) {
   const {
@@ -34,8 +34,8 @@ function parseInputParameters(request) {
   }
 
   return {
-    id: validatedPathParameters.phoneId,
-    ...validatedBody
+    'id': validatedPathParameters.phoneId,
+    ...validatedBody,
   };
 }
 
@@ -49,5 +49,5 @@ async function handleRequest(request) {
 }
 
 module.exports = {
-    handleRequest
+  handleRequest,
 };

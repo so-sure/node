@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const dataAccessLayer = require('../../../src/data_access_layer/phones')
+const dataAccessLayer = require('../../../src/data_access_layer/phones');
 
 const PATH_SCHEMA = joi.object().keys({
   'phoneId': joi.string().required(),
@@ -31,5 +31,5 @@ async function handleRequest(request) {
 }
 
 module.exports = {
-    handleRequest
+  handleRequest,
 };

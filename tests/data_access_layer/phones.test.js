@@ -1,77 +1,77 @@
 const { expect } = require('chai');
-const phones = require('../../src/data_access_layer/phones')
-const testUtils = require('../utils')
+const phones = require('../../src/data_access_layer/phones');
+const testUtils = require('../utils');
 
 describe('application_layer/phones', function() {
-    before(async function () {
-        testUtils.clearData();
+  before(async function () {
+    testUtils.clearData();
+  });
+
+  describe('getPhoneById', function() {
+    it('returns a inserted phone with given id', async function() {
+      const expected = {
+        'id':              1,
+        'make':            'LG',
+        'model':           'G6',
+        'storage':         32,
+        'monthly_premium': 4.49,
+        'excess':          75,
+      };
+      await testUtils.postTestData(expected);
+
+      const actual = await phones.getPhoneById(1);
+      expect(actual).to.deep.equal({
+        ...expected,
+        'yearly_premium': '49.39',
+
+      });
     });
+  });
 
-    describe('getPhoneById', function() {
-        it('returns a inserted phone with given id', async function() {
-            const expected = {
-                id: 1,
-                make: 'LG',
-                model: 'G6',
-                storage: 32,
-                monthly_premium: 4.49,
-                excess: 75
-              };
-            await testUtils.postTestData(expected);
+  describe('deletePhoneById', function() {
+    it('deletes an inserted phone with given id', async function() {
+      const expected = {
+        'id':              10,
+        'make':            'LG',
+        'model':           'G6',
+        'storage':         32,
+        'monthly_premium': 4.49,
+        'excess':          75,
+      };
+      await testUtils.postTestData(expected);
+      await phones.deletePhoneById(10);
 
-            const actual = await phones.getPhoneById(1)
-            expect(actual).to.deep.equal({
-                ...expected,
-                "yearly_premium": "49.39"
+      const actual = await phones.getPhoneById(10);
 
-            });
-        });
+      expect(actual).to.be.undefined;
     });
+  });
 
-    describe('deletePhoneById', function() {
-        it('deletes an inserted phone with given id', async function() {
-            const expected = {
-                id: 10,
-                make: 'LG',
-                model: 'G6',
-                storage: 32,
-                monthly_premium: 4.49,
-                excess: 75
-              };
-            await testUtils.postTestData(expected);
-            await phones.deletePhoneById(10)
+  describe('updatePhone', function() {
+    it('updates an inserted phone with a valid schema given id', async function() {
+      const originalPhone = {
+        'id':              11,
+        'make':            'LG',
+        'model':           'G6',
+        'storage':         32,
+        'monthly_premium': 4.49,
+        'excess':          75,
+      };
+      await testUtils.postTestData(originalPhone);
 
-            const actual = await phones.getPhoneById(10)
+      const updatedPhone = {
+        ...originalPhone,
+        // Lets update the storage and increase the monthly premium
+        'storage':         32,
+        'monthly_premium': 9.49,
+        'yearly_premium':  '104.39',
+      };
 
-            expect(actual).to.be.undefined;
-        });
+      await phones.updatePhone(updatedPhone);
+
+      const actual = await phones.getPhoneById(11);
+
+      expect(actual).to.deep.equal(updatedPhone);
     });
-
-    describe('updatePhone', function() {
-        it('updates an inserted phone with a valid schema given id', async function() {
-            const originalPhone = {
-                id: 11,
-                make: 'LG',
-                model: 'G6',
-                storage: 32,
-                monthly_premium: 4.49,
-                excess: 75
-              };
-            await testUtils.postTestData(originalPhone);
-
-            const updatedPhone = {
-                ...originalPhone,
-                // Lets update the storage and increase the monthly premium
-                storage: 32,
-                monthly_premium: 9.49,
-                "yearly_premium": "104.39"
-              };
-
-            await phones.updatePhone(updatedPhone)
-
-            const actual = await phones.getPhoneById(11)
-
-            expect(actual).to.deep.equal(updatedPhone);
-        });
-    });
+  });
 });
