@@ -6,6 +6,13 @@ const connection = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
 });
 
+const MONTHS_IN_A_YEAR = 12;
+const MONTHS_DISCOUNTED_ON_YEARLY_PREMIUMS = 1;
+// Yearly premiums get 1 months discount
+const NON_DISCOUNTED_MONTHS = MONTHS_IN_A_YEAR - MONTHS_DISCOUNTED_ON_YEARLY_PREMIUMS;
+
+const PRICE_DECIMAL_PLACE = 2;
+
 const GET_PHONE_BY_ID = `
     SELECT *
     FROM sosure.phone
@@ -41,9 +48,15 @@ async function getPhoneById(phoneId) {
                   if(!foundPhone) {
                       return resolve(foundPhone);
                   }
+
+                  const castMonthlyPremiums = Number(foundPhone.monthly_premium);
+
+                  const yearlyPremium = Number(foundPhone.monthly_premium * NON_DISCOUNTED_MONTHS).toFixed(PRICE_DECIMAL_PLACE)
+
                   const casted = {
                       ...foundPhone,
-                      monthly_premium: Number(foundPhone.monthly_premium)
+                      monthly_premium: castMonthlyPremiums,
+                      yearly_premium: yearlyPremium
 
                   }
                 resolve(casted);

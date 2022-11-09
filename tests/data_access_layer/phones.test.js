@@ -20,7 +20,11 @@ describe('application_layer/phones', function() {
             await testUtils.postTestData(expected);
 
             const actual = await phones.getPhoneById(1)
-            expect(actual).to.deep.equal(expected);
+            expect(actual).to.deep.equal({
+                ...expected,
+                "yearly_premium": "49.39"
+
+            });
         });
     });
 
@@ -44,7 +48,7 @@ describe('application_layer/phones', function() {
     });
 
     describe('updatePhone', function() {
-        it('deletes an inserted phone with given id', async function() {
+        it('updates an inserted phone with a valid schema given id', async function() {
             const originalPhone = {
                 id: 11,
                 make: 'LG',
@@ -60,6 +64,7 @@ describe('application_layer/phones', function() {
                 // Lets update the storage and increase the monthly premium
                 storage: 32,
                 monthly_premium: 9.49,
+                "yearly_premium": "104.39"
               };
 
             await phones.updatePhone(updatedPhone)

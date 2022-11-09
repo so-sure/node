@@ -40,7 +40,10 @@ describe('application_layer/phones', function() {
 
             const actual = await phones.handleRequest(validRequest);
 
-            expect(actual).to.deep.equal(expected);
+            expect(actual).to.deep.equal({
+                ...expected,
+                "yearly_premium": "49.39"
+            });
         });
     });
 });
