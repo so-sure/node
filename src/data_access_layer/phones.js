@@ -1,9 +1,9 @@
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "foobar",
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
 });
 
 const GET_PHONE_BY_ID = `
@@ -36,6 +36,7 @@ async function getPhoneById(phoneId) {
               [phoneId],
               function (err, result) {
                 if (err) throw err;
+
                 resolve(result[0]);
               });
         });

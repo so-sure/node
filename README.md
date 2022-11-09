@@ -5,10 +5,7 @@ docker install
 brew install docker-compose
 docker-compose up
 
-
 repoace uuid
-
-
 
 # Node Vagrant Server
 Base node.js app repository
