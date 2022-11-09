@@ -37,7 +37,16 @@ async function getPhoneById(phoneId) {
               function (err, result) {
                 if (err) throw err;
 
-                resolve(result[0]);
+                  const [foundPhone] = result;
+                  if(!foundPhone) {
+                      return resolve(foundPhone);
+                  }
+                  const casted = {
+                      ...foundPhone,
+                      monthly_premium: Number(foundPhone.monthly_premium)
+
+                  }
+                resolve(casted);
               });
         });
     })

@@ -1,4 +1,5 @@
 const mysql = require("mysql2");
+require('dotenv').config()
 
 const connection = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -6,12 +7,23 @@ const connection = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
 });
 
+const INSERT_PHONE = `
+    INSERT INTO sosure.phone
+    (
+        make,
+        model,
+        storage,
+        monthly_premium,
+        excess,
+        id
+    ) VALUES (?,?,?,?,?,?)
+`
+
 async function postTestData(phone) {
     return new Promise((resolve,reject) => {
         connection.connect(function(err) {
           if (err) throw err;
-          connection.query(
-              "INSERT INTO sosure.phone (make, model, storage, monthly_premium, excess, id) VALUES (?,?,?,?,?,?)",
+          connection.query(INSERT_PHONE,
           [
             phone.make,
             phone.model,
@@ -38,6 +50,7 @@ function clearData() {
           });
     });
 }
+
 
 module.exports = {
     postTestData,

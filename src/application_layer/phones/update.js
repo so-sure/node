@@ -10,7 +10,7 @@ const REQUEST_SCHEMA = joi.object().keys({
     'make': joi.string().required(),
     'model': joi.string().required(),
     'storage': joi.number().required(),
-    'monthly_premium': joi.string().required(),
+    'monthly_premium': joi.number().precision(2).required(),
     'excess': joi.number().required(),
 })
 

@@ -27,7 +27,7 @@ describe('application_layer/phones', function() {
                 make: 'LG',
                 model: 'G6',
                 storage: 32,
-                monthly_premium: '4.49',
+                monthly_premium: 4.49,
                 excess: 75
               };
             await testUtils.postTestData(expected);

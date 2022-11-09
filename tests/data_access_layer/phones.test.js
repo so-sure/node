@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const phones = require('../../src/data_access_layer/phones')
 const testUtils = require('../utils')
 
-describe('external_access_layer/phones', function() {
+describe('application_layer/phones', function() {
     before(async function () {
         testUtils.clearData();
     });
@@ -14,7 +14,7 @@ describe('external_access_layer/phones', function() {
                 make: 'LG',
                 model: 'G6',
                 storage: 32,
-                monthly_premium: '4.49',
+                monthly_premium: 4.49,
                 excess: 75
               };
             await testUtils.postTestData(expected);
@@ -31,7 +31,7 @@ describe('external_access_layer/phones', function() {
                 make: 'LG',
                 model: 'G6',
                 storage: 32,
-                monthly_premium: '4.49',
+                monthly_premium: 4.49,
                 excess: 75
               };
             await testUtils.postTestData(expected);
@@ -50,7 +50,7 @@ describe('external_access_layer/phones', function() {
                 make: 'LG',
                 model: 'G6',
                 storage: 32,
-                monthly_premium: '4.49',
+                monthly_premium: 4.49,
                 excess: 75
               };
             await testUtils.postTestData(originalPhone);
@@ -59,7 +59,7 @@ describe('external_access_layer/phones', function() {
                 ...originalPhone,
                 // Lets update the storage and increase the monthly premium
                 storage: 32,
-                monthly_premium: '9.49',
+                monthly_premium: 9.49,
               };
 
             await phones.updatePhone(updatedPhone)
