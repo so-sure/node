@@ -7,7 +7,6 @@ const PATH_SCHEMA = joi.object().keys({
 }).required();
 
 function parseInputParameters(request) {
-    console.log(request)
   const {
     'value': validatedPathParameters,
     'error': pathValidationError,
@@ -24,12 +23,9 @@ function parseInputParameters(request) {
 
 
 async function handleRequest(request) {
-    console.log(1)
   const { phoneId } = parseInputParameters(request);
-    console.log(2)
 
   const foundPhone = await dataAccessLayer.deletePhoneById(phoneId);
-    console.log(3)
 
   return phoneId;
 }
