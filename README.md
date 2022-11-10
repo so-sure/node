@@ -8,6 +8,14 @@ docker-compose build
 docker-compose up
 ```
 
+## Full test suite
+
+Once the database is set up to run the full test suite run
+
+```
+npm test
+```
+
 ## TODO
 
 1) Complete Docker setup

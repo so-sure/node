@@ -25,13 +25,13 @@ const DELETE_PHONE_BY_ID = `
 `;
 
 const UPDATE_PHONE = `
-  UPDATE sosure.phone
-  SET make = ?,
-  model = ?,
-  storage = ?,
-  monthly_premium = ?,
-  excess = ?
-  WHERE id = ?
+    UPDATE sosure.phone
+    SET make = ?,
+    model = ?,
+    storage = ?,
+    monthly_premium = ?,
+    excess = ?
+    WHERE id = ?
 `;
 
 async function connectDatabase() {
