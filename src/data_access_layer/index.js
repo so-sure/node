@@ -34,12 +34,21 @@ const UPDATE_PHONE = `
   WHERE id = ?
 `;
 
-async function getPhoneById(phoneId) {
+async function connectDatabase() {
   return new Promise((resolve, reject) => {
     connection.connect(function(err) {
       if (err) {
-        throw err;
+        reject(err);
       }
+      resolve()
+    })
+  })
+}
+
+async function getPhoneById(phoneId) {
+  await connectDatabase();
+
+  return new Promise((resolve, reject) => {
       connection.query(
         GET_PHONE_BY_ID,
         [ phoneId ],
@@ -65,16 +74,13 @@ async function getPhoneById(phoneId) {
           };
           resolve(casted);
         });
-    });
   });
 }
 
 async function deletePhoneById(phoneId) {
+  await connectDatabase();
+
   return new Promise((resolve, reject) => {
-    connection.connect(function(err) {
-      if (err) {
-        throw err;
-      }
       connection.query(
         DELETE_PHONE_BY_ID,
         [ phoneId ],
@@ -84,16 +90,13 @@ async function deletePhoneById(phoneId) {
           }
           resolve(phoneId);
         });
-    });
   });
 }
 
 async function updatePhone(phone) {
+  await connectDatabase();
+
   return new Promise((resolve, reject) => {
-    connection.connect(function(err) {
-      if (err) {
-        throw err;
-      }
       connection.query(
         UPDATE_PHONE,
         [
@@ -110,7 +113,6 @@ async function updatePhone(phone) {
           }
           resolve(phone);
         });
-    });
   });
 }
 
