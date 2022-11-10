@@ -16,6 +16,13 @@ Once the database is set up to run the full test suite run
 npm test
 ```
 
+## .env variables
+
+```
+DATABASE_HOST="localhost"
+DATABASE_USER="root"
+DATABASE_PASSWORD="foobar"
+```
 ## TODO
 
 1) Complete Docker setup
