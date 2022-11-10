@@ -13,6 +13,6 @@ CREATE TABLE IF NOT EXISTS phone (
 );
 
 REPLACE INTO phone VALUES
-(1, 'LG'     , 'G6'        ,  32, 4.49,  75),
-(2, 'Apple'  , 'iPhone 11' , 128, 7.99, 125),
+(1, 'Apple'  , 'iPhone 11' , 128, 7.99, 125),
+(2, 'LG'     , 'G6'        ,  32, 4.49,  75),
 (3, 'Samsung', 'Galaxy S10', 512, 9.99, 150);

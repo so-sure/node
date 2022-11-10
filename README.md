@@ -1,11 +1,18 @@
 
+## Getting Started
 
-
+```
 docker install
 brew install docker-compose
+docker-compose build
 docker-compose up
+```
 
-repoace uuid
+## TODO
+
+1) Complete Docker setup
+2) replace ids with UUID
+3) endpoint tests
 
 # Node Vagrant Server
 Base node.js app repository

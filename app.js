@@ -66,4 +66,4 @@ app.post("/phone/:id", jsonParser, async (request, response) => {
     }
 });
 
-app.listen(3000, () => console.log(`Example app listening at http://localhost:1337 form the host or http://localhost:${port} from docker`))
+app.listen(3000, () => console.log(`Example app listening at http://localhost:3000 form the host or http://localhost:${3000} from docker`))

@@ -64,12 +64,12 @@ async function getPhoneById(phoneId) {
 
         const castMonthlyPremiums = Number(foundPhone.monthly_premium);
 
-        const yearlyPremium = Number(foundPhone.monthly_premium * NON_DISCOUNTED_MONTHS).toFixed(PRICE_DECIMAL_PLACE);
+        const castYearlyPremium = Number(foundPhone.monthly_premium * NON_DISCOUNTED_MONTHS).toFixed(PRICE_DECIMAL_PLACE);
 
         const casted = {
           ...foundPhone,
           'monthly_premium': castMonthlyPremiums,
-          'yearly_premium':  yearlyPremium,
+          'yearly_premium':  castYearlyPremium,
 
         };
         resolve(casted);

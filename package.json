@@ -9,7 +9,8 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "test": "mocha tests/**/* --exit"
+    "test": "mocha tests/**/* --exit",
+    "start": "node app.js"
   },
   "devDependencies": {
     "mocha": "^10.1.0"
