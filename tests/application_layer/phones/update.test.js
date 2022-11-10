@@ -3,10 +3,9 @@ const chai = require('chai');
 const { expect } = chai;
 const testUtils = require('../../utils');
 
-const phones = require('../../../src/application_layer/phones/update');
-const dataAccessLayer = require('../../../src/data_access_layer/phones');
+const applicationLayer = require('../../../src/application_layer');
 
-describe('application_layer/phones', function() {
+describe('application_layer/phones/update', function() {
   before(async function () {
     testUtils.clearData();
   });
@@ -15,11 +14,12 @@ describe('application_layer/phones', function() {
     it('fails if input id invalid', async function() {
       const invalidRequest = {
         'params': {
-          'phoneId': 44,
+          'id': true,
         },
       };
+
       expect(
-        phones.parseInputParameters(invalidRequest)
+        applicationLayer.phones.update.parseInputParameters(invalidRequest)
       ).to.throw;
     });
 
@@ -32,16 +32,16 @@ describe('application_layer/phones', function() {
           'make': 1,
         },
       };
+
       expect(
-        phones.parseInputParameters(invalidRequest)
+        applicationLayer.phones.update.parseInputParameters(invalidRequest)
       ).to.throw;
     });
 
 
-    it('updates phone if valid path id and body provided', async function() {
+    it.only('updates phone if valid path id and body provided', async function() {
       const testPhoneId = '1';
       const originalPhone = {
-        'id':              testPhoneId,
         'make':            'LG',
         'model':           'G6',
         'storage':         32,
@@ -49,13 +49,14 @@ describe('application_layer/phones', function() {
         'excess':          75,
       };
 
-      await testUtils.postTestData(originalPhone);
-
-      delete originalPhone.id;
+      await testUtils.postTestData({
+          ...originalPhone,
+          'id': testPhoneId,
+      });
 
       const updatedPhone = {
         ...originalPhone,
-        // Lets just update the storage
+        // Lets update the storage
         'storage': 64,
       };
 
@@ -68,8 +69,7 @@ describe('application_layer/phones', function() {
         },
       };
 
-      const parsed = await phones.parseInputParameters(validRequest);
-      const actual = await dataAccessLayer.updatePhone(parsed);
+      const actual = await applicationLayer.phones.update.parseInputParameters(validRequest);
 
       expect(actual).to.deep.equal({
         'id': testPhoneId,

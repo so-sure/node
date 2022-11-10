@@ -2,9 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser');
 
-const readPhone = require('./src/application_layer/phones/read');
-const deletePhone = require('./src/application_layer/phones/delete');
-const updatePhone = require('./src/application_layer/phones/update');
+const applicationLayer = require('./src/application_layer');
 const dataAccessLayer = require('./src/data_access_layer/phones');
 
 const app = express()
@@ -18,7 +16,7 @@ app.get('/', (req, res) => res.send('Hello Worlds - So-sure-itw !'))
 app.get("/phone/:id", async (request, response) => {
     let parsedInput;
     try {
-      parsedInput = await deletePhone.parseInputParameters(request);
+      parsedInput = await applicationLayer.phones.delete.parseInputParameters(request);
     } catch(err) {
         response.status(400).send(err);
     }
@@ -36,7 +34,7 @@ app.delete("/phone/:id", async (request, response) => {
     let parsedInput;
 
     try {
-      parsedInput = await readPhone.parseInputParameters(request);
+      parsedInput = await applicationLayer.phones.read.parseInputParameters(request);
     } catch(err) {
         response.status(400).send(err);
     }
@@ -54,7 +52,7 @@ app.post("/phone/:id", jsonParser, async (request, response) => {
     let parsedInput;
 
     try {
-      parsedInput = await updatePhone.parseInputParameters(request);
+      parsedInput = await applicationLayer.phones.update.parseInputParameters(request);
     } catch(err) {
         response.status(400).send(err.message);
     }
