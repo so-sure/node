@@ -19,7 +19,7 @@ describe('application_layer/phones', function() {
       };
       await testUtils.postTestData(expected);
 
-      const actual = await dataAccessLayer.getPhoneById(1);
+      const actual = await dataAccessLayer.phones.getPhoneById(1);
       expect(actual).to.deep.equal({
         ...expected,
         'yearly_premium': '49.39',
@@ -40,9 +40,9 @@ describe('application_layer/phones', function() {
       };
       await testUtils.postTestData(expected);
 
-      await dataAccessLayer.deletePhoneById(10);
+      await dataAccessLayer.phones.deletePhoneById(10);
 
-      const actual = await dataAccessLayer.getPhoneById(10);
+      const actual = await dataAccessLayer.phones.getPhoneById(10);
 
       expect(actual).to.be.undefined;
     });
@@ -68,9 +68,9 @@ describe('application_layer/phones', function() {
         'yearly_premium':  '104.39',
       };
 
-      await dataAccessLayer.updatePhone(updatedPhone);
+      await dataAccessLayer.phones.updatePhone(updatedPhone);
 
-      const actual = await dataAccessLayer.getPhoneById(11);
+      const actual = await dataAccessLayer.phones.getPhoneById(11);
 
       expect(actual).to.deep.equal(updatedPhone);
     });

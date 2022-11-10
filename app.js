@@ -22,7 +22,7 @@ app.get("/phone/:id", async (request, response) => {
     }
 
     try {
-      const foundPhone = await dataAccessLayer.getPhoneById(parsedInput.id);
+      const foundPhone = await dataAccessLayer.phones.getPhoneById(parsedInput.id);
 
       response.json(foundPhone)
     } catch(err) {
@@ -40,7 +40,7 @@ app.delete("/phone/:id", async (request, response) => {
     }
 
     try {
-      const deletedPhoneId = await dataAccessLayer.deletePhoneById(parsedInput.id);
+      const deletedPhoneId = await dataAccessLayer.phones.deletePhoneById(parsedInput.id);
 
       response.json({ id: deletedPhoneId })
     } catch(err) {
@@ -58,7 +58,7 @@ app.post("/phone/:id", jsonParser, async (request, response) => {
     }
 
     try {
-      const updatedPhone = await dataAccessLayer.updatePhone(parsedInput);
+      const updatedPhone = await dataAccessLayer.phones.updatePhone(parsedInput);
 
       response.json(updatedPhone)
     } catch(err) {

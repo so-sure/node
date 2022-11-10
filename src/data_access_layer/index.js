@@ -115,7 +115,9 @@ async function updatePhone(phone) {
 }
 
 module.exports = {
-  getPhoneById,
-  deletePhoneById,
-  updatePhone,
+  phones: {
+      getPhoneById,
+      deletePhoneById,
+      updatePhone,
+  }
 };
