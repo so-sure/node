@@ -6,8 +6,7 @@ const applicationLayer = require('./src/application_layer');
 const dataAccessLayer = require('./src/data_access_layer');
 
 const app = express()
-var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+const jsonParser = bodyParser.json()
 
 const port = process.env.NODE_PORT
 

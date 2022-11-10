@@ -12,4 +12,3 @@ COPY sql/init.sql .
 COPY app.js .
 
 EXPOSE 3000
-EXPOSE 3306
