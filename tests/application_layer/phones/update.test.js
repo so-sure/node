@@ -4,6 +4,7 @@ const { expect } = chai;
 const testUtils = require('../../utils');
 
 const phones = require('../../../src/application_layer/phones/update');
+const dataAccessLayer = require('../../../src/data_access_layer/phones');
 
 describe('application_layer/phones', function() {
   before(async function () {
@@ -18,7 +19,7 @@ describe('application_layer/phones', function() {
         },
       };
       expect(
-        phones.handleRequest(invalidRequest)
+        phones.parseInputParameters(invalidRequest)
       ).to.throw;
     });
 
@@ -32,7 +33,7 @@ describe('application_layer/phones', function() {
         },
       };
       expect(
-        phones.handleRequest(invalidRequest)
+        phones.parseInputParameters(invalidRequest)
       ).to.throw;
     });
 
@@ -60,14 +61,15 @@ describe('application_layer/phones', function() {
 
       const validRequest = {
         'params': {
-          'phoneId': testPhoneId,
+          'id': testPhoneId,
         },
         'body': {
           ...updatedPhone,
         },
       };
 
-      const actual = await phones.handleRequest(validRequest);
+      const parsed = await phones.parseInputParameters(validRequest);
+      const actual = await dataAccessLayer.updatePhone(parsed);
 
       expect(actual).to.deep.equal({
         'id': testPhoneId,

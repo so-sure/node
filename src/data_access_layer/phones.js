@@ -82,7 +82,7 @@ async function deletePhoneById(phoneId) {
           if (err) {
             throw err;
           }
-          resolve(result);
+          resolve(phoneId);
         });
     });
   });
@@ -108,7 +108,7 @@ async function updatePhone(phone) {
           if (err) {
             throw err;
           }
-          resolve(result);
+          resolve(phone);
         });
     });
   });

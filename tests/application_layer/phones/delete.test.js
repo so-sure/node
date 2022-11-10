@@ -4,6 +4,7 @@ const { expect } = chai;
 const testUtils = require('../../utils');
 
 const phones = require('../../../src/application_layer/phones/delete');
+const dataAccessLayer = require('../../../src/data_access_layer/phones');
 
 describe('application_layer/phones', function() {
   before(async function () {
@@ -18,7 +19,7 @@ describe('application_layer/phones', function() {
         },
       };
       expect(
-        phones.handleRequest(invalidRequest)
+        phones.parseInputParameters(invalidRequest)
       ).to.throw;
     });
 
@@ -35,13 +36,14 @@ describe('application_layer/phones', function() {
 
       const validRequest = {
         'params': {
-          'phoneId': '1',
+          'id': '1',
         },
       };
 
-      const actual = await phones.handleRequest(validRequest);
+      const parsed = await phones.parseInputParameters(validRequest);
+      const actual = await dataAccessLayer.deletePhoneById(parsed);
 
-      expect(actual).to.equal(expected.id);
+      expect(actual).to.deep.equal({ id: expected.id });
     });
   });
 });

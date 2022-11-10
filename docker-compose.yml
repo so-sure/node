@@ -13,6 +13,9 @@ services:
       - database
   database:
     image: mysql:8.0
+    command: --init-file /sql/main.sql
+    volumes:
+      - ./main.sql:/sql/main.sql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
