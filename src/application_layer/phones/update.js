@@ -38,5 +38,5 @@ function parseInputParameters(request) {
 }
 
 module.exports = {
-  parseInputParameters
+  parseInputParameters,
 };
