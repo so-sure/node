@@ -39,7 +39,7 @@ describe('application_layer/phones/update', function() {
     });
 
 
-    it.only('updates phone if valid path id and body provided', async function() {
+    it('updates phone if valid path id and body provided', async function() {
       const testPhoneId = '1';
       const originalPhone = {
         'make':            'LG',

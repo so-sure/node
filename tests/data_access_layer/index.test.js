@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const phones = require('../../src/data_access_layer/phones');
+const dataAccessLayer = require('../../src/data_access_layer');
 const testUtils = require('../utils');
 
 describe('application_layer/phones', function() {
@@ -19,7 +19,7 @@ describe('application_layer/phones', function() {
       };
       await testUtils.postTestData(expected);
 
-      const actual = await phones.getPhoneById(1);
+      const actual = await dataAccessLayer.getPhoneById(1);
       expect(actual).to.deep.equal({
         ...expected,
         'yearly_premium': '49.39',
@@ -39,9 +39,10 @@ describe('application_layer/phones', function() {
         'excess':          75,
       };
       await testUtils.postTestData(expected);
-      await phones.deletePhoneById(10);
 
-      const actual = await phones.getPhoneById(10);
+      await dataAccessLayer.deletePhoneById(10);
+
+      const actual = await dataAccessLayer.getPhoneById(10);
 
       expect(actual).to.be.undefined;
     });
@@ -67,9 +68,9 @@ describe('application_layer/phones', function() {
         'yearly_premium':  '104.39',
       };
 
-      await phones.updatePhone(updatedPhone);
+      await dataAccessLayer.updatePhone(updatedPhone);
 
-      const actual = await phones.getPhoneById(11);
+      const actual = await dataAccessLayer.getPhoneById(11);
 
       expect(actual).to.deep.equal(updatedPhone);
     });

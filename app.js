@@ -3,7 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 
 const applicationLayer = require('./src/application_layer');
-const dataAccessLayer = require('./src/data_access_layer/phones');
+const dataAccessLayer = require('./src/data_access_layer');
 
 const app = express()
 var jsonParser = bodyParser.json()

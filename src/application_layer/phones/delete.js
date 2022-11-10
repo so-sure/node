@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const dataAccessLayer = require('../../../src/data_access_layer/phones');
+const dataAccessLayer = require('../../../src/data_access_layer');
 
 const PATH_SCHEMA = joi.object().keys({
   'id': joi.string().required(),
