@@ -1,39 +1,33 @@
-# Node Vagrant Server
-Base node.js app repository
+# Node Docker Server
+SO-SURE Node JS Task Repo
 
 ## Setup
 
-Clone the repository
-
+1. Clone the repository
+2. Execute the following commands:
 ```
-vagrant up
-vagrant ssh
-cd /vagrant
-node app.js
-```
-
-The server should then be accessible from localhost:1337 on them host machine
-
-If you want to use a database:
-Mysql and Mongo are both installed on the vagrant machine
-To access the from a db manager, use a SSH tunnel:
-```
-localhost:2222
-user: vagrant
-pwd:  vagrant
-```
-Then use the usual basic connections ( Feel free to create your own users etc...):
-
-Mongo:
-```
-127.0.0.1:27017
-user: root
-pwd:  root
+cd ./node
+docker-compose build
+docker-compose up -d
 ```
 
-Mysql:
+The above commands will create docker images and run the following servers:
 ```
-127.0.0.1:3306
-user: root
-pwd:  root
+Web
+http://localhost:1234/
 ```
+```
+Mongo
+localhost:27017
+Database: so-sure
+no auth required for localhost
+```
+```
+MySQL
+localhost:3306 
+Database: so-sure
+User: root
+Password: password
+```
+
+
