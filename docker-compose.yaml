@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+    api-phones:
+        build:
+          context: "."
+          dockerfile: "./dockerfile"
+        environment:
+            API_PORT: 1234
+        command: npm run start
+        depends_on:
+          - db-phones-mongo
+          - db-phones-mysql    
+        ports:
+            - 1234:1234
+        networks:
+            - vpn 
+
+    db-phones-mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        environment:
+            MONGO_INITDB_DATABASE: so-sure
+        networks:
+            - vpn 
+
+    db-phones-mysql:
+        image: mysql
+        ports:
+            - 3306:3306
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: so-sure
+
+networks:
+    vpn:
+        driver: bridge   
+        name: vpn
